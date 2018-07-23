@@ -5,6 +5,9 @@
     <div class="content-wrap">
         <div class="container clearfix">
             <div id="posts" class="small-thumbs">
+                @if(Session::has('thanhcongTT'))
+                    <div class="thanhcongTT"></div>
+                @endif
                 @foreach($lichsu as $ls)
                 <div class="entry clearfix">
                     <div class="entry-image">
