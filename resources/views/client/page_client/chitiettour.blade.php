@@ -59,6 +59,7 @@
                                     <ul class="nav nav-tabs">		
                                         <li><a href="#thongtinhdv" data-toggle="tab" id="tthdv">Hướng dẫn viên</a></li>
                                         <li><a href="#comments" data-toggle="tab" id="bl">Bình luận</a></li>
+                                        <li><a href="#danhgia" data-toggle="tab" id="dg">Đánh giá</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -89,6 +90,7 @@
                             </div>
 
                             @include('client.page_client.binhluan')
+                            @include('client.page_client.danhgia')
                         </div>
                     @else
                         <h1 class="text-center title">Tour đã bị xóa</h1><br><br>
