@@ -9,7 +9,7 @@
             <nav id="primary-menu">
                 <ul>
                     <li class="current"><a href="{{route('trang-chu')}}"><div>Trang chủ</div></a></li>
-                    <li class="current"><a><div>Quy định</div></a></li>
+                    <li class="current"><a data-toggle="modal" data-target="#QuyDinh"><div>Quy định</div></a></li>
                     <li class="current"><a><div>Liên hệ</div></a></li>
 
                     <li class="current"><a><div>Địa điểm</div></a>
@@ -27,6 +27,7 @@
                                 {{Auth::user()->hoten}}
                             </a>
                             <ul>    
+                                <li><a data-toggle="modal" data-target="#SuaThongTin"><div>Sửa thông tin cá nhân</div></a></li>
                                 @if(Auth::user()->quyen == 1)
                                     <li><a href="{{route('lich-su')}}"><div>Lịch sử đặt tour</div></a></li>
                                 @elseif(Auth::user()->quyen == 2)
@@ -59,3 +60,7 @@
         </div>
     </div>
 </header>
+<div id="divtimkiem">
+    <ul id="dsketqua">
+    </ul>
+</div>

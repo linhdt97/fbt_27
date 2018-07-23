@@ -17,6 +17,18 @@ $(document).ready(function() {
         $('#btnDatTour').attr('disabled', '');
     }
 
+    if($('div').hasClass('loiSuaThongTin') || $('div').hasClass('successSuaThongTin')){
+        $('#SuaThongTin').modal();
+    }
+
+    $("#changePassword").change(function(){
+        if($(this).is(":checked")){
+            $(".password").removeAttr('disabled');
+        }else{
+            $(".password").attr('disabled', '');
+        }
+    });
+
     if($('div').hasClass('thanhcongTT')){
         alert('Thanh toán thành công.');
     }
@@ -190,6 +202,52 @@ $(document).ready(function() {
             scrollTop : 0
         }, 700);
     })
+
+    $("#top-search-trigger").click(function(){
+        $('.stretched').toggleClass("top-search-open");
+    });
+
+    $('#timkiem').keyup(function(){
+        var timkiem = $(this).val();
+        var _token = $('#hiddenSearch').val();
+        if(timkiem.length >3){
+            $('#divtimkiem').show();
+            $('#dsketqua li').remove();
+            $.ajax({
+                url: "timkiem",
+                method: "post",
+                data: {search:timkiem, _token:_token},
+                dataType: "text",
+                success: function(data){
+                    var data = JSON.parse(data);
+                    if (data.soluong > 0) {
+                        if (data.soluong <= 7) {
+                            for (var i = 0; i < data.soluong; i++) {
+                                stringds = '<li style="padding: 5px"><img src="upload/'+ data.ketqua[i]['hinhanh'] +'" height="50" width="50" style="float:left;"> <a href = "chi-tiet/'+ data.ketqua[i]['id'] +'">' + data.ketqua[i]['tentour'] +'</a><br><span>'+ data.ketqua[i]['giatour']+' vnd</span></li>';
+                                $('#dsketqua').append(stringds);
+                            }
+                        }else{
+                            for (var i = 0; i < 7; i++) {
+                                stringds = '<li style="padding: 5px"><img src="upload/'+ data.ketqua[i]['hinhanh'] +'" height="50" width="50" style="float:left;"> <a href = "chi-tiet/'+ data.ketqua[i]['id'] +'">' + data.ketqua[i]['tentour'] +'</a><br><span>'+ data.ketqua[i]['giatour']+' vnd</span></li>';
+                                $('#dsketqua').append(stringds);
+                            }
+                            $('#dsketqua').append('<li align="center"><b><a href="tim-kiem?timkiem='+timkiem+'"><< Xem tat ca >></a></b></li>');
+                        }                
+                    }else{
+                        $('#dsketqua').append('<li>Khong tim thay ket qua yeu cau</li>');
+                    }                    
+                }
+            });
+        }else{
+            $('#divtimkiem').hide();
+        }
+    });
+
+    $('#timkiem').blur(function(){
+        setTimeout(function(){
+            $('#divtimkiem').hide()
+        }, 200);
+    });
 });
 
 function clickReply(id){
