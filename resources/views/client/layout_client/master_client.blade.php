@@ -26,5 +26,6 @@
         @include('client.layout_client.modal_client')
         @yield('content')   
         @include('client.layout_client.footer_client')
+        <div id="gotoTop" class="icon-angle-up"></div>
     </body>
 </html>
