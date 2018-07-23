@@ -24,5 +24,8 @@ Route::get('tour-cua-hdv/{idhdv}', ['as' => 'tour_hdv', 'uses' => 'PageControlle
 
 Route::get('chi-tiet/{id}', ['as' => 'chi-tiet', 'uses' => 'TourController@show']);
 
+Route::post('dat-tour/{idtour}', ['as' => 'dat-tour', 'uses' => 'PageController@postDatTour']);
+Route::get('lich-su-dat-tour', ['as' => 'lich-su', 'uses' => 'PageController@getLichSu']);
+
 //xu ly ajax
 Route::post('binhluan', 'AjaxController@postBinhLuan');

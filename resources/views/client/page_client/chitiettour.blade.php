@@ -35,8 +35,19 @@
 
                             <div class="post-navigation clearfix text-center">
                                 @if(Auth::check())
-                                    @if(Auth::user()->quyen == 1)
-                                        <em>{{number_format($cttour->giatour)}} VNĐ</em><a data-toggle="modal" data-target="#DatTour"><i class="icon-shopping-cart"></i></a>
+                                    <?php $co = true ?>
+                                    @foreach($cttour->bill as $bll)
+                                        @if(($bll->tinhtrangdon == 0 || $bll->tinhtrangdon == 1 || $bll->tinhtrangdon == 3) && $bll->users_id == Auth::user()->id)
+                                            <?php $co = false ?>
+                                        @endif
+                                    @endforeach
+
+                                    @if($co == false)
+                                        <a><em>Bạn đã đặt tour này</em></a>
+                                    @else
+                                        @if(Auth::user()->quyen == 1)
+                                            <em>{{number_format($cttour->giatour)}} VNĐ</em><a data-toggle="modal" data-target="#DatTour"><i class="icon-shopping-cart"></i></a>
+                                        @endif
                                     @endif
                                 @else
                                     <em>{{number_format($cttour->giatour)}} VNĐ</em><a data-toggle="modal" data-target="#DangNhap"><i class="icon-shopping-cart"></i></a>
